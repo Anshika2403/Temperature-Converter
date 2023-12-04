@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/868cedf20e.js" crossorigin="anonymous"></script>
+    <style>
+        *{
+        font-family:PT Serif;
+        }
+        header{
+            background-color:blueviolet;
+            text-align:center;
+            height:75px;
+            font-size:60px;
+            padding: 5px;
+            color: white;
+            font-weight: 200;
+        }
+        #container{
+            margin: 50px 350px;
+            display: grid;
+            grid-template-columns:150px 150px;
+            border: 2px solid blueviolet;
+            padding: 10px 110px;
+            width: 400px;
+            gap: 0 70px;
+        }
+        .box{
+            padding: 10px 20px;
+           /* width: 150px;*/
+        }
+        .in{
+            border: 2px solid black;
+            width: 150px;
+            height: 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+        #long{
+           grid-column: 1 / span 2; 
+           padding: 8px 130px 40px;
+        }
+        #btn{
+            grid-column: 1 / span 2; 
+           padding: 0 160px 40px;
+        }
+        #sub{
+            background-color:blueviolet;
+            height:40px;
+            width:100px;
+            border: 1px solid black;
+            border-radius:10px;
+            color:white;
+            cursor:pointer;
+        }
+        #res{
+            grid-column: 1 / span 2; 
+           padding: 0 130px;
+        }
+        #out{ 
+        border: 2px solid black;
+            width: 150px;
+            height: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+       
+    </style>
+</head>
+<body>
+    <header>
+        Temperature Converter  <i class="fas fa-temperature-low"></i>
+    </header>
+    <div id="container">
+        <div class="box">
+            From:<br>
+            <select id="from" name="from" class="in">
+                <option value="celsius">Celsius (<span>&#8451;</span>)</option>
+                <option value="fahrenheit">Fahrenheit (<span>&#8457;</span>)</option>
+                <option value="kelvin">Kelvin (<span>&#8490;</span>)</option>
+            </select>
+        </div>
+        <div class="box">
+            To:<br>
+            <select id="to" name="to" class="in">
+                <option value="celsius">Celsius  (<span>&#8451;</span>)</option>
+                <option value="fahrenheit">Fahrenheit (<span>&#8457;</span>)</option>
+                <option value="kelvin">Kelvin (<span>&#8490;</span>)</option>
+            </select>
+        </div><br>
+        <div class="box" id="long">
+        Value:<br>
+        <input type="number" id="temp" name="temp" class="in">
+        </div>
+        <div class="box" id="btn">
+            <button type="button" id="sub" onclick="convert()">Convert</button>
+        </div>
+        <div class="box" id="res">
+        Result:
+        <div id="out"> 
+            <output name="x" id="resu"></output>
+            </div>
+        </div>
+    </div>
+    <script>
+        function convert(){
+        let fromin=document.getElementById('from').value;
+        let toin=document.getElementById('to').value;
+        let result=document.getElementById('resu');
+        let fah;
+        let cel;
+        let kev;
+        if(fromin == "celsius" && toin == "fahrenheit")
+        {
+            cel=document.getElementById('temp').value;
+            fah=(parseInt(cel) * 9/5) + 32;
+            result.innerText=fah;
+            }
+        else if(fromin == "celsius" && toin == "kelvin")
+        {
+            cel=document.getElementById('temp').value;
+            kev= parseInt(cel)+ 273.15;
+            result.innerText=kev;
+            }
+        else if(fromin == "fahrenheit" && toin == "celsius")
+        {
+            fah=document.getElementById('temp').value;
+            cel=(parseInt(fah) - 32) * 5/9;
+            result.innerText=cel.toFixed(4).replace(/0+0/,"");
+            }
+            else if(fromin == "fahrenheit" && toin == "kelvin")
+        {
+            fah=document.getElementById('temp').value;
+            kev=((parseInt(fah) - 32) * 5/9)+ 273.15;
+            result.innerText=kev;
+            }
+            else if(fromin == "kelvin" && toin == "celsius")
+        {
+            kev=document.getElementById('temp').value;
+            cel=parseInt(kev) - 273.15;
+            result.innerText=cel.toFixed(4).replace(/0+0/,"");
+            }
+            else if(fromin == "kelvin" && toin == "fahrenheit")
+        {
+            kev=document.getElementById('temp').value;
+            fah=(parseInt(kev) - 273.15) * 9/5 +32;
+            result.innerText=fah;
+            }
+        }
+       
+    </script>
+</body>
+</html>
